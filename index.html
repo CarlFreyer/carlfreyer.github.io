@@ -1,12 +1,97 @@
 <!DOCTYPE html>
 <html>
     <head>
-
+        <style>
+            body{
+                margin: 0;
+                padding: 0;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            #menuBar{
+                background-color: rgba(80,45,14,0.9);
+                color: white;
+            }
+            #menuBar h1{
+                margin: 0;
+                padding: 0;
+                margin-left: 10px;
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+            #stuffHolder{
+                margin: 0;
+                padding: 10px;
+                height: 90vh;
+                display: flex;
+                flex-direction: row;
+                align-content: center;
+                gap: 10px;
+            }
+            .sections{
+                color: #3b3b3b;
+                background-color: #e8e8e8;
+                border: 1px solid #3b3b3b;
+                border-radius: 15px;
+            }
+            .sections h2{
+                margin: 0;
+                padding: 5px;
+                padding-top: 10px;
+                padding-left: 10px;
+            }
+            .listItems{
+                user-select: none;
+                cursor: pointer;
+                margin: 0;
+                padding: 5px;
+                border-top: 1px solid lightgray;
+            }
+            .listItems:hover{
+                background-color: white;
+            }
+            #list{
+                flex-grow: 1;
+            }
+            #issue{
+                flex-grow: 2;
+            }
+            .low{
+                padding: 3px;
+                font-weight: bold;
+                background-color: greenyellow;
+                border-radius: 5px;
+            }
+            .medium{
+                padding: 3px;
+                font-weight: bold;
+                background-color: orange;
+                border-radius: 5px;
+            }
+            .high{
+                padding: 3px;
+                font-weight: bold;
+                background-color: red;
+                border-radius: 5px;
+            }
+        </style>
     </head>
     <body>
-        <div>
+        <div id="menuBar">
             <h1>BUS 001 IT Department</h1>
         </div>
+        <div id="stuffHolder">
+            <div id="list" class="sections">
+                <table>
+                    <tr><div><h2>Ticket List:</h2></div></tr>
+                    <tr><div class="listItems"><p>Issue Connecting to Internet <span class="medium">Medium</span></p></div></tr>
+                    <tr><div class="listItems"><p>Forgot Email password <span class="low">Low</span></p></div></tr>
+                    <tr><div class="listItems"><p>Accounting server down <span class="high">High</span></p></div></tr>
+                    <tr><div class="listItems"><p>Landline phone not working <span class="medium">Medium</span></p></div></tr>
+                    <tr><div class="listItems"><p>Coffee machine broken <span class="high">High</span></p></div></tr>
+                </table>
+            </div>
+            <div id="issue" class="sections">
+            </div>
+        </div>
     </body>
-    <p>Test</p>
 </html>
