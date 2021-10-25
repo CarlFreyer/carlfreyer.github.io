@@ -1,97 +1,495 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <style>
-            body{
-                margin: 0;
-                padding: 0;
-                font-family: Arial, Helvetica, sans-serif;
-            }
-            #menuBar{
-                background-color: rgba(80,45,14,0.9);
-                color: white;
-            }
-            #menuBar h1{
-                margin: 0;
-                padding: 0;
-                margin-left: 10px;
-                padding-top: 10px;
-                padding-bottom: 10px;
-            }
-            #stuffHolder{
-                margin: 0;
-                padding: 10px;
-                height: 90vh;
-                display: flex;
-                flex-direction: row;
-                align-content: center;
-                gap: 10px;
-            }
-            .sections{
-                color: #3b3b3b;
-                background-color: #e8e8e8;
-                border: 1px solid #3b3b3b;
-                border-radius: 15px;
-            }
-            .sections h2{
-                margin: 0;
-                padding: 5px;
-                padding-top: 10px;
-                padding-left: 10px;
-            }
-            .listItems{
-                user-select: none;
-                cursor: pointer;
-                margin: 0;
-                padding: 5px;
-                border-top: 1px solid lightgray;
-            }
-            .listItems:hover{
-                background-color: white;
-            }
-            #list{
-                flex-grow: 1;
-            }
-            #issue{
-                flex-grow: 2;
-            }
-            .low{
-                padding: 3px;
-                font-weight: bold;
-                background-color: greenyellow;
-                border-radius: 5px;
-            }
-            .medium{
-                padding: 3px;
-                font-weight: bold;
-                background-color: orange;
-                border-radius: 5px;
-            }
-            .high{
-                padding: 3px;
-                font-weight: bold;
-                background-color: red;
-                border-radius: 5px;
-            }
-        </style>
-    </head>
-    <body>
-        <div id="menuBar">
-            <h1>BUS 001 IT Department</h1>
+
+<head>
+    <title>Bus 001 IT Department</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        #menuBar {
+            background-color: rgba(80, 45, 14, 0.9);
+            color: white;
+        }
+
+        #menuBar h1 {
+            margin: 0;
+            padding: 0;
+            margin-left: 10px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        #stuffHolder {
+            margin: 0;
+            padding: 10px;
+            height: 90vh;
+            display: flex;
+            flex-direction: row;
+            align-content: center;
+            gap: 10px;
+        }
+
+        .sections {
+            color: #3b3b3b;
+            background-color: #e8e8e8;
+            border: 1px solid #3b3b3b;
+            border-radius: 15px;
+        }
+
+        .sections h2 {
+            margin: 0;
+            padding: 5px;
+            padding-top: 10px;
+            padding-left: 10px;
+        }
+
+        .listItems {
+            user-select: none;
+            cursor: pointer;
+            margin: 0;
+            padding: 5px;
+            border-top: 1px solid lightgray;
+        }
+
+        .listItems:hover {
+            background-color: white !important;
+        }
+
+        #list {
+            flex-basis: 30vw;
+        }
+
+        #issue {
+            flex-basis: 70vw;
+        }
+
+        .marking {
+            padding: 3px;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        .button {
+            margin: 0;
+            padding: 10px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .lowPress:hover {
+            background-color: #c7e38f;
+        }
+
+        .mediumPress:hover {
+            background-color: #ffcd73;
+        }
+
+        .highPress:hover {
+            background-color: #ff7373;
+        }
+
+        .rejectedPress:hover {
+            background-color: #97adee;
+        }
+
+        .none {
+            background-color: yellow;
+        }
+
+        .low {
+            background-color: greenyellow;
+        }
+
+        .medium {
+            background-color: orange;
+        }
+
+        .high {
+            background-color: red;
+        }
+
+        .rejected {
+            background-color: Royalblue;
+        }
+
+        .buttonHolder {
+            padding: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .buttonHolder div p {
+            margin: 0;
+        }
+
+        .desc {
+            padding: 10px;
+        }
+
+        .direct {
+            padding: 10px;
+        }
+
+        .help {
+            margin: 10px;
+            padding: 10px;
+            display: none;
+            border-radius: 5px;
+        }
+
+        .correct {
+            border: 1px solid green;
+            background-color: #8bc58b;
+        }
+
+        .incorrect {
+            border: 1px solid red;
+            background-color: #ffcccc;
+        }
+
+        .questions {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="menuBar">
+        <h1>BUS 001 IT Department</h1>
+    </div>
+    <div id="stuffHolder">
+        <div id="list" class="sections">
+            <table>
+                <tr>
+                    <div>
+                        <h2>Ticket List:</h2>
+                    </div>
+                </tr>
+                <tr>
+                    <div id="0_button" class="listItems" onclick="menuSelect(0)">
+                        <p>Issue Connecting to Internet <span id="span_0" class="marking none">None</span></p>
+                    </div>
+                </tr>
+                <tr>
+                    <div id="1_button" class="listItems" onclick="menuSelect(1)">
+                        <p>Forgot Email password <span id="span_1" class="marking none">None</span></p>
+                    </div>
+                </tr>
+                <tr>
+                    <div id="2_button" class="listItems" onclick="menuSelect(2)">
+                        <p>Accounting information gone <span id="span_2" class="marking none">None</span></p>
+                    </div>
+                </tr>
+                <tr>
+                    <div id="3_button" class="listItems" onclick="menuSelect(3)">
+                        <p>Landline phone not working <span id="span_3" class="marking none">None</span></p>
+                    </div>
+                </tr>
+                <tr>
+                    <div id="4_button" class="listItems" onclick="menuSelect(4)">
+                        <p>Coffee machine broken <span id="span_4" class="marking none">None</span></p>
+                    </div>
+                </tr>
+            </table>
         </div>
-        <div id="stuffHolder">
-            <div id="list" class="sections">
-                <table>
-                    <tr><div><h2>Ticket List:</h2></div></tr>
-                    <tr><div class="listItems"><p>Issue Connecting to Internet <span class="medium">Medium</span></p></div></tr>
-                    <tr><div class="listItems"><p>Forgot Email password <span class="low">Low</span></p></div></tr>
-                    <tr><div class="listItems"><p>Accounting server down <span class="high">High</span></p></div></tr>
-                    <tr><div class="listItems"><p>Landline phone not working <span class="medium">Medium</span></p></div></tr>
-                    <tr><div class="listItems"><p>Coffee machine broken <span class="high">High</span></p></div></tr>
-                </table>
+        <div id="issue" class="sections">
+            <div id="0" class="questions">
+                <div>
+                    <h2>Title: <span style="font-weight: 100;">Issue Connecting to Internet</span></h2>
+                </div>
+                <div class="desc">
+                    <p><span style="font-weight: bold;">Description:</span> Whenever I turn on my company laptop it does
+                        not connect to my home WiFi. I think its broken because my phone connects fine. I tried turning
+                        it off and on again, but that did not help.</p>
+                </div>
+                <div class="direct">
+                    <p><span style="font-weight: bold;">Directions:</span> As a systems administrator, select the
+                        priority level of this ticket or reject it.</p>
+                </div>
+                <div class="buttonHolder">
+                    <div class="button low lowPress" onclick="ansSelected(0, 0)">
+                        <p>Low</p>
+                    </div>
+                    <div class="button medium mediumPress" onclick="ansSelected(0, 1)">
+                        <p>Medium</p>
+                    </div>
+                    <div class="button high highPress" onclick="ansSelected(0, 2)">
+                        <p>High</p>
+                    </div>
+                    <div class="button rejected rejectedPress" onclick="ansSelected(0, 3)">
+                        <p>Rejected</p>
+                    </div>
+                </div>
+                <div id="0_0" class="help correct">
+                    <p>Low is correct. This issue only pertains to one employee in a remote situation. While it is an
+                        important problem that does need to be solved, it is not a large scale problem that threatens
+                        the entire business's productivity.
+                    </p>
+                </div>
+                <div id="0_1" class="help incorrect">
+                    <p>Medium is incorrect. This issue does not have the potential to disrupt the entire business
+                        because the issue exists due to the employee's internet or laptop.
+                    </p>
+                </div>
+                <div id="0_2" class="help incorrect">
+                    <p>High is incorrect. This issue does not effect the entire business, but only one employee.
+                    </p>
+                </div>
+                <div id="0_3" class="help incorrect">
+                    <p>Rejected is incorrect. This may not be a significant issue, but it is still important. This
+                        employee cannot complete tasks assigned to them due to an technical issue, and the IT team is
+                        responsible for solving it.
+                    </p>
+                </div>
             </div>
-            <div id="issue" class="sections">
+            <div id="1" class="questions">
+                <div>
+                    <h2>Title: <span style="font-weight: 100;">Forgot Email password</span></h2>
+                </div>
+                <div class="desc">
+                    <p><span style="font-weight: bold;">Description:</span> I lost my sticky note with my password. Can
+                        you please send me my password?</p>
+                </div>
+                <div class="direct">
+                    <p><span style="font-weight: bold;">Directions:</span> As a systems administrator, select the
+                        priority level of this ticket or reject it.</p>
+                </div>
+                <div class="buttonHolder">
+                    <div class="button low lowPress" onclick="ansSelected(1, 0)">
+                        <p>Low</p>
+                    </div>
+                    <div class="button medium mediumPress" onclick="ansSelected(1, 1)">
+                        <p>Medium</p>
+                    </div>
+                    <div class="button high highPress" onclick="ansSelected(1, 2)">
+                        <p>High</p>
+                    </div>
+                    <div class="button rejected rejectedPress" onclick="ansSelected(1, 3)">
+                        <p>Rejected</p>
+                    </div>
+                </div>
+                <div id="1_0" class="help incorrect">
+                    <p>Low is incorrect. This issue does only involve one employee, but it also raises a security
+                        concern.
+                        Storing passwords on sticky notes is not a secure way to keep passwords and can lead to unwanted
+                        users.
+                    </p>
+                </div>
+                <div id="1_1" class="help correct">
+                    <p>Medium is correct. This issue only applies to one employee but does present a security issue.
+                        Due to the security issue this ticket needs to be moved to medium.
+                    </p>
+                </div>
+                <div id="1_2" class="help incorrect">
+                    <p>High is incorrect. Since this issue only pertains to one user and security is not extremely
+                        compromised, this is not a high priority.
+                    </p>
+                </div>
+                <div id="1_3" class="help incorrect">
+                    <p>Rejected is incorrect. This ticket presents a network security issue that IT needs to respond to
+                        promptly and an IT help issue that is not a high priority.
+                    </p>
+                </div>
+            </div>
+            <div id="2" class="questions">
+                <div>
+                    <h2>Title: <span style="font-weight: 100;">Accounting information gone</span></h2>
+                </div>
+                <div class="desc">
+                    <p><span style="font-weight: bold;">Description:</span> I went to access the excel balance sheets,
+                        but they are not on the server. I checked my entire computer and they are not there either. We
+                        need have a report by the end of this week! Please help!</p>
+                </div>
+                <div class="direct">
+                    <p><span style="font-weight: bold;">Directions:</span> As a systems administrator, select the
+                        priority level of this ticket or reject it.</p>
+                </div>
+                <div class="buttonHolder">
+                    <div class="button low lowPress" onclick="ansSelected(2, 0)">
+                        <p>Low</p>
+                    </div>
+                    <div class="button medium mediumPress" onclick="ansSelected(2, 1)">
+                        <p>Medium</p>
+                    </div>
+                    <div class="button high highPress" onclick="ansSelected(2, 2)">
+                        <p>High</p>
+                    </div>
+                    <div class="button rejected rejectedPress" onclick="ansSelected(2, 3)">
+                        <p>Rejected</p>
+                    </div>
+                </div>
+                <div id="2_0" class="help incorrect">
+                    <p>Low is incorrect. This issue effects the entire company and could be a security problem.
+                    </p>
+                </div>
+                <div id="2_1" class="help incorrect">
+                    <p>Medium is incorrect. This issue effects the entire company and could be a security problem.
+                    </p>
+                </div>
+                <div id="2_2" class="help correct">
+                    <p>High is correct. Without the accounting data the accounting department may not be able to create
+                        its report, so this issue could be a large problem for the entire company. IT needs to find the
+                        data or get a backup for the accounting department. Additionally, the loss of this data could
+                        pose a security concern and needs to be investigated.
+                    </p>
+                </div>
+                <div id="2_3" class="help incorrect">
+                    <p>Rejected is incorrect. The IT department needs to respond to this promptly because it involves
+                        data storage.
+                    </p>
+                </div>
+            </div>
+            <div id="3" class="questions">
+                <div>
+                    <h2>Title: <span style="font-weight: 100;">Landline phone not working</span></h2>
+                </div>
+                <div class="desc">
+                    <p><span style="font-weight: bold;">Description:</span>I can use my cellphone, but the phone at my
+                        desk is not making calls.</p>
+                </div>
+                <div class="direct">
+                    <p><span style="font-weight: bold;">Directions:</span> As a systems administrator, select the
+                        priority level of this ticket or reject it.</p>
+                </div>
+                <div class="buttonHolder">
+                    <div class="button low lowPress" onclick="ansSelected(3, 0)">
+                        <p>Low</p>
+                    </div>
+                    <div class="button medium mediumPress" onclick="ansSelected(3, 1)">
+                        <p>Medium</p>
+                    </div>
+                    <div class="button high highPress" onclick="ansSelected(3, 2)">
+                        <p>High</p>
+                    </div>
+                    <div class="button rejected rejectedPress" onclick="ansSelected(3, 3)">
+                        <p>Rejected</p>
+                    </div>
+                </div>
+                <div id="3_0" class="help incorrect">
+                    <p>Low is incorrect. This might only effect one employee, but it could be more widespread.
+                    </p>
+                </div>
+                <div id="3_1" class="help correct">
+                    <p>Medium is correct. While this ticket is only mentioning a localized issue, there could be more
+                        phones that are not working properly. IT should check if the phones systems are working
+                        correctly.
+                    </p>
+                </div>
+                <div id="3_2" class="help incorrect">
+                    <p>High is incorrect. This is not a high priority issue yet because only one ticket has been
+                        recieved about it.
+                    </p>
+                </div>
+                <div id="3_3" class="help incorrect">
+                    <p>Rejected is incorrect. Regardless of what the issue is with the phone it is the IT department's
+                        responsibility to solve it.
+                    </p>
+                </div>
+            </div>
+            <div id="4" class="questions">
+                <div>
+                    <h2>Title: <span style="font-weight: 100;">Coffee machine broken</span></h2>
+                </div>
+                <div class="desc">
+                    <p><span style="font-weight: bold;">Description:</span> I came in this morning and the Coffee
+                        machine was not working. I cannot do my job without coffee! The entire office can't!</p>
+                </div>
+                <div class="direct">
+                    <p><span style="font-weight: bold;">Directions:</span> As a systems administrator, select the
+                        priority level of this ticket or reject it.</p>
+                </div>
+                <div class="buttonHolder">
+                    <div class="button low lowPress" onclick="ansSelected(4, 0)">
+                        <p>Low</p>
+                    </div>
+                    <div class="button medium mediumPress" onclick="ansSelected(4, 1)">
+                        <p>Medium</p>
+                    </div>
+                    <div class="button high highPress" onclick="ansSelected(4, 2)">
+                        <p>High</p>
+                    </div>
+                    <div class="button rejected rejectedPress" onclick="ansSelected(4, 3)">
+                        <p>Rejected</p>
+                    </div>
+                </div>
+                <div id="4_0" class="help incorrect">
+                    <p>Low is incorrect. Coffee machines are not the part of information technology.
+                    </p>
+                </div>
+                <div id="4_1" class="help incorrect">
+                    <p>Medium is incorrect. Coffee machines are not the part of information technology.
+                    </p>
+                </div>
+                <div id="4_2" class="help incorrect">
+                    <p>High is incorrect. Coffee machines are not the part of information technology.
+                    </p>
+                </div>
+                <div id="4_3" class="help correct">
+                    <p>Rejected is correct. Coffee machines are not the IT department's responsibility.
+                    </p>
+                </div>
             </div>
         </div>
-    </body>
+    </div>
+    <script>
+        function menuSelect(question) {
+            document.getElementById("0").style.display = "none";
+            document.getElementById("1").style.display = "none";
+            document.getElementById("2").style.display = "none";
+            document.getElementById("3").style.display = "none";
+            document.getElementById("4").style.display = "none";
+            document.getElementById("0_button").style.backgroundColor = "#e8e8e8";
+            document.getElementById("1_button").style.backgroundColor = "#e8e8e8";
+            document.getElementById("2_button").style.backgroundColor = "#e8e8e8";
+            document.getElementById("3_button").style.backgroundColor = "#e8e8e8";
+            document.getElementById("4_button").style.backgroundColor = "#e8e8e8";
+            document.getElementById(question).style.display = "block";
+            document.getElementById(question + "_button").style.backgroundColor = "white";
+        }
+        function ansSelected(question, ans) {
+            console.log(question + " " + 0);
+            document.getElementById(question + "_" + 0).style.display = "none";
+            document.getElementById(question + "_" + 1).style.display = "none";
+            document.getElementById(question + "_" + 2).style.display = "none";
+            document.getElementById(question + "_" + 3).style.display = "none";
+            document.getElementById(question + "_" + ans).style.display = "block";
+            let correct = -1;
+            let name = " ";
+            switch (question) {
+                case 0:
+                    correct = 0;
+                    name = "Low";
+                    break;
+                case 1:
+                    correct = 1;
+                    name = "Medium";
+                    break;
+                case 2:
+                    correct = 2;
+                    name = "High";
+                    break;
+                case 3:
+                    correct = 1;
+                    name = "Medium";
+                    break;
+                case 4:
+                    correct = 3;
+                    name = "Rejected";
+                    break;
+            }
+            if (ans == correct) {
+                console.log(name);
+                document.getElementById("span_" + question).innerHTML = name;
+                document.getElementById("span_" + question).className = "marking " + name.toLowerCase();
+            }
+        }
+    </script>
+</body>
+
 </html>
