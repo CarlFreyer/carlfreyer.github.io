@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="icon" type="image/x-icon" href="logodark.png">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" type="text/css" />
+    <title>InSight | Invasive Species Finder</title>
+    <script>
+      let map;
+      let featureLayer;
+      let infoWindow;
+
+      function initMap() {
+        map = new google.maps.Map(document.getElementById("map"), {
+          center: { lat: 37.0902, lng: -95.7129 },
+          zoom: 5,
+          mapId: "e7cc9950b9f10d3d",
+        });
+        featureLayer = map.getFeatureLayer("ADMINISTRATIVE_AREA_LEVEL_1");
+        featureLayer.addListener("click", handlePlaceClick);
+        infoWindow = new google.maps.InfoWindow({});
+        applyStyleToSelected();
+      }
+
+      async function handlePlaceClick(event) {
+        let feature = event.features[0];
+
+        if (!feature.placeId) return;
+
+        applyStyleToSelected(feature.placeId);
+
+        const place = await feature.fetchPlace();
+        let content = place.displayName;
+
+        updateList(content);
+      }
+
+      const styleDefault = {
+        strokeColor: "#627af4",
+        strokeOpacity: 1.0,
+        strokeWeight: 2.0,
+        fillColor: "white",
+        fillOpacity: 0.1,
+      };
+      const styleClicked = {
+        ...styleDefault,
+        fillColor: "#4aa952",
+        fillOpacity: 0.5,
+      };
+
+      function applyStyleToSelected(placeid) {
+        featureLayer.style = (options) => {
+          if (placeid && options.feature.placeId == placeid) {
+            return styleClicked;
+          }else if(options.feature.placeId == "ChIJieUyHiaALYgRPbQiUEchRsI" || options.feature.placeId == "ChIJgRo4_MQfVIgRGa4i6fUwP60" || options.feature.placeId == "ChIJzbK8vXDWTIgRlaZGt0lBTsA" || options.feature.placeId == "ChIJRQnL1KVUSogRQzrN3mjHALs" || options.feature.placeId == "ChIJ35Dx6etNtokRsfZVdmU3r_I" || options.feature.placeId == "ChIJO9YMTXYFx4kReOgEjBItHZQ" || options.feature.placeId == "ChIJn0AAnpX7wIkRjW0_-Ad70iw" || options.feature.placeId == "ChIJqaUj8fBLzEwRZ5UY3sHGz90" || options.feature.placeId == "ChIJpVER8hFT5okR5XBhBVttmq4" || options.feature.placeId == "ChIJD9cOYhQ15IkR5wbB57wYTh4" || options.feature.placeId == "ChIJ_b9z6W1l44kRHA2DVTbQxkU" || options.feature.placeId == "ChIJ66bAnUtEs0wR64CmJa8CyNc" || options.feature.placeId == "ChIJ_87aSGzctEwRtGtUNnSJTSY" || options.feature.placeId == "ChIJ1YpTHd4dsEwR0KggZ2_MedY" || options.feature.placeId == "ChIJwY5NtXrpNogRFtmfnDlkzeU" || options.feature.placeId == "ChIJEQTKxz2qTE0Rs8liellI3Zc" || options.feature.placeId == "ChIJr-OEkw_0qFIR1kmG-LjV1fI" || options.feature.placeId == "ChIJmwt4YJpbWE0RD6L-EJvJogI" || options.feature.placeId == "ChIJGWD48W9e7ocR2VnHV0pj78Y" || options.feature.placeId == "ChIJfeMiSNXmwIcRcr1mBFnEW7U" || options.feature.placeId == "ChIJYSc_dD-e0ocR0NLf_z5pBaQ" || options.feature.placeId == "ChIJyVMZi0xzQogR_N_MxU5vH3c" || options.feature.placeId == "ChIJawF8cXEXo4cRXwk-S6m0wmg" || options.feature.placeId == "ChIJSTKCCzZwQIYRPN4IGI8c6xY" || options.feature.placeId == "ChIJHRv42bxQa4gRcuwyy84vEH4" || options.feature.placeId == "ChIJGSZubzgtC4gRVlkRZFCCFX8"){
+            return styleDefault;
+
+          }
+        };
+      }
+
+      function updateList(content) {
+        const list = document.getElementsByClassName("listItem");
+        for (let i = 0; i < list.length; i++) {
+          list[i].style.display = "none";
+        }
+        if (content.toLowerCase() == "pennsylvania") {
+          document.getElementById("species1").style.display = "flex";
+          document.getElementById("species2").style.display = "flex";
+          document.getElementById("species4").style.display = "flex";
+        } else if (content.toLowerCase() == "north carolina") {
+          document.getElementById("species1").style.display = "flex";
+          document.getElementById("species4").style.display = "flex";
+        } else if (content.toLowerCase() == "virginia") {
+          document.getElementById("species1").style.display = "flex";
+          document.getElementById("species2").style.display = "flex";
+          document.getElementById("species4").style.display = "flex";
+        } else if (content.toLowerCase() == "west virginia") {
+          document.getElementById("species1").style.display = "flex";
+          document.getElementById("species4").style.display = "flex";
+        } else if (content.toLowerCase() == "maryland") {
+          document.getElementById("species1").style.display = "flex";
+          document.getElementById("species2").style.display = "flex";
+          document.getElementById("species4").style.display = "flex";
+        } else if (content.toLowerCase() == "delaware") {
+          document.getElementById("species1").style.display = "flex";
+          document.getElementById("species2").style.display = "flex";
+          document.getElementById("species4").style.display = "flex";
+        } else if (content.toLowerCase() == "new jersey") {
+          document.getElementById("species1").style.display = "flex";
+          document.getElementById("species2").style.display = "flex";
+          document.getElementById("species4").style.display = "flex";
+        } else if (content.toLowerCase() == "new york") {
+          document.getElementById("species1").style.display = "flex";
+          document.getElementById("species2").style.display = "flex";
+          document.getElementById("species4").style.display = "flex";
+        } else if (content.toLowerCase() == "connecticut") {
+          document.getElementById("species1").style.display = "flex";
+          document.getElementById("species4").style.display = "flex";
+        } else if (content.toLowerCase() == "rhode island") {
+          document.getElementById("species1").style.display = "flex";
+          document.getElementById("species4").style.display = "flex";
+        } else if (content.toLowerCase() == "massachusetts") {
+          document.getElementById("species1").style.display = "flex";
+          document.getElementById("species2").style.display = "flex";
+          document.getElementById("species4").style.display = "flex";
+        } else if (content.toLowerCase() == "ohio") {
+          document.getElementById("species1").style.display = "flex";
+          document.getElementById("species2").style.display = "flex";
+          document.getElementById("species4").style.display = "flex";
+        } else if (content.toLowerCase() == "indiana") {
+          document.getElementById("species1").style.display = "flex";
+          document.getElementById("species3").style.display = "flex";
+          document.getElementById("species2").style.display = "flex";
+          document.getElementById("species4").style.display = "flex";
+        } else if (content.toLowerCase() == "michigan") {
+          document.getElementById("species1").style.display = "flex";
+          document.getElementById("species3").style.display = "flex";
+          document.getElementById("species2").style.display = "flex";
+          document.getElementById("species4").style.display = "flex";
+        } else if (content.toLowerCase() == "minnesota") {
+          document.getElementById("species3").style.display = "flex";
+          document.getElementById("species2").style.display = "flex";
+          document.getElementById("species4").style.display = "flex";
+        } else if (content.toLowerCase() == "iowa") {
+          document.getElementById("species3").style.display = "flex";
+          document.getElementById("species2").style.display = "flex";
+        } else if (content.toLowerCase() == "missouri") {
+          document.getElementById("species3").style.display = "flex";
+        } else if (content.toLowerCase() == "kansas") {
+          document.getElementById("species3").style.display = "flex";
+          document.getElementById("species2").style.display = "flex";
+        } else if (content.toLowerCase() == "illinois") {
+          document.getElementById("species3").style.display = "flex";
+          document.getElementById("species2").style.display = "flex";
+        } else if (content.toLowerCase() == "kentucky") {
+          document.getElementById("species3").style.display = "flex";
+          document.getElementById("species2").style.display = "flex";
+        } else if (content.toLowerCase() == "wisconsin") {
+          document.getElementById("species4").style.display = "flex";
+          document.getElementById("species2").style.display = "flex";
+        } else if (content.toLowerCase() == "maine") {
+          document.getElementById("species4").style.display = "flex";
+          document.getElementById("species2").style.display = "flex";
+        } else if (content.toLowerCase() == "new hampshire") {
+          document.getElementById("species4").style.display = "flex";
+        } else if (content.toLowerCase() == "vermont") {
+          document.getElementById("species4").style.display = "flex";
+        } else if (content.toLowerCase() == "texas") {
+          document.getElementById("species2").style.display = "flex";
+        } else if (content.toLowerCase() == "arkansas") {
+          document.getElementById("species2").style.display = "flex";
+        }
+      }
+
+      window.initMap = initMap;
+    </script>
+  </head>
+  <body>
+    <div class="main">
+        <img src="logo.png"/>
+      <h1>InSight</h1>
+    </div>
+    <div class="title">
+      <h1>Detecting Invasive Species</h1>
+      <p>Your source for learning about invasive species in your area.</p>
+      <p>
+        Simply click on your state and you've got
+        <span style="font-weight: bold">InSight</span>!
+      </p>
+    </div>
+
+    <div id="map"></div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9r_ls6-asDGhdMgsXEqNhvvms65d2CD8&v=beta&region=us&callback=initMap"></script>
+    <div class="listContain">
+      <a href="https://www.agriculture.pa.gov/Plants_Land_Water/PlantIndustry/Entomology/spotted_lanternfly/Pages/default.aspx" id="species1" class="listItem">
+        <div class="listPicContain">
+          <img
+            class="listPic"
+            src="https://th.bing.com/th/id/OIP.GLw0tXQ93MuX9PyGfwX53QHaE8?pid=ImgDet&rs=1"
+          />
+        </div>
+        <div class="listHeaderContain">
+          <h1 class="listHeader">Spotted Lanternfly</h1>
+        </div>
+      </a>
+      <a id="species2" class="listItem" href="https://extension.entm.purdue.edu/fieldcropsipm/insects/euro-cornborer.php">
+        <div class="listPicContain">
+          <img
+            class="listPic"
+            src="http://t1.gstatic.com/licensed-image?q=tbn:ANd9GcT1dIc50aUl2vkQGVgg8Ti1UVOnQL_1WtUvf_6zAYQFjO6NJR2O8AQfOQ4aBto_XprIuVZxQ2vMzrQFUT8"
+          />
+        </div>
+        <div class="listHeaderContain">
+          <h1 class="listHeader">European Corn Borer</h1>
+        </div>
+      </a>
+      <a href="https://influentialpoints.com/Gallery/Monelliopsis_caryae_american_walnut_aphid.htm" id="species3" class="listItem">
+        <div class="listPicContain">
+          <img
+            class="listPic"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4fu_dVevIsoegJCMfRv3J2DgaMcHGbK3amaN9WFfX3rBIPDJwpJ_XVtKCQUa1iYry5AM&usqp=CAU"
+          />
+        </div>
+        <div class="listHeaderContain">
+          <h1 class="listHeader">American Walnut Aphid</h1>
+        </div>
+      </a>
+      <a href="https://www.dec.ny.gov/animals/83118.html" id="species4" class="listItem">
+        <div class="listPicContain">
+          <img
+            class="listPic"
+            src="https://hmf.williams.edu/files/Smoths-e1658262118481.jpg"
+          />
+        </div>
+        <div class="listHeaderContain">
+          <h1 class="listHeader">Spongy Moth</h1>
+        </div>
+      </a>
+    </div>
+    <div>
+      <p class="footer">Source: <a href= "https://www.eddmaps.org/">https://www.eddmaps.org/</a></p>
+    </div>
+  </body>
+</html>

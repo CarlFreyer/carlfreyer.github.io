@@ -1,0 +1,26 @@
+body{
+    background-color: lightblue;
+}
+.title {
+
+    color: black;
+    font-size: 15px;
+    text-align: center;
+    
+}
+
+.td {
+    color: blue;
+    font-size: 10px;
+        
+}
+.img {
+    width:100px;
+    height:100px;
+    margin-right:10px;
+    margin-bottom:10px;
+}
+
+
+
+
