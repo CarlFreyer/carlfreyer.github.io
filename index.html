@@ -20,7 +20,6 @@
         });
         featureLayer = map.getFeatureLayer("ADMINISTRATIVE_AREA_LEVEL_1");
         featureLayer.addListener("click", handlePlaceClick);
-        infoWindow = new google.maps.InfoWindow({});
         applyStyleToSelected();
       }
 
@@ -154,8 +153,6 @@
           document.getElementById("species2").style.display = "flex";
         }
       }
-
-      window.initMap = initMap;
     </script>
   </head>
   <body>
